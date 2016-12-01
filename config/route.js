@@ -1,5 +1,5 @@
 module.exports = {
-  home: '/',
-  tweet: '/tweet',
-  auth: '/auth'
+  home: {url: '/', auth: true },
+  tweet: {url: '/tweet', auth: true },
+  auth: {url: '/auth', auth: false }
 }

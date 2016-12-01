@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var fs = require('fs');
 var routes = require('../config/route');
+var auth = require('../middlewares/auth');
 
 var boot = function(folder) {
   var currentFolder = (folder == __dirname) ? __dirname : __dirname + '\\' + folder;
@@ -10,7 +11,8 @@ var boot = function(folder) {
         if(fs.lstatSync(currentFolder + '/' +file).isDirectory()) {
           boot(file);
         }else {
-          router.use(routes[folder], require('./' + folder + '/' + file))
+          var r = routes[folder];
+          router.use(r.url, auth(r.auth), require('./' + folder + '/' + file))
         }
       }
     });
@@ -19,8 +21,8 @@ var boot = function(folder) {
 
 boot(__dirname);
 
-/*router.use('/', require('./home/homeController'));
-router.use('/tweet', require('./tweet/tweetController'));
+/*router.use('/', auth, require('./home/homeController'));
+router.use('/tweet', auth, require('./tweet/tweetController'));
 router.use('/auth', require('./auth/authController'));*/
 
 module.exports = router;

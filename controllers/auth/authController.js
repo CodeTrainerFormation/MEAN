@@ -17,12 +17,12 @@ router.route('/login')
         .limit(1)
         .exec(function(err, users){
           if(users[0]) {
-            console.log('auth success');
             req.session.user = users[0];
+            res.redirect('/');
+          }else {
+            res.render('login.ejs', {error: "Mauvais identifiants"});
           }
-
-          res.redirect('/');
-        })
+        });
   });
 
 module.exports = router;

@@ -23,6 +23,7 @@ boot(__dirname);
 
 /*router.use('/', auth, require('./home/homeController'));
 router.use('/tweet', auth, require('./tweet/tweetController'));
-router.use('/auth', require('./auth/authController'));*/
+router.use('/auth', require('./auth/authController'));
+router.use('/api', require('./api/tweetApiController'));*/
 
 module.exports = router;

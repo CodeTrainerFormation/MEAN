@@ -5,7 +5,7 @@
 ### Récuperation du projet
 
 ```cli
-git clone https://github.com/CodeTrainerFormation/NodeParis.git
+git clone https://github.com/CodeTrainerFormation/MEAN.git
 ```
 
 ### Installation des dépendances

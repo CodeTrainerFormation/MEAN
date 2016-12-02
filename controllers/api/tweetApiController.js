@@ -10,6 +10,13 @@ router.post('/tweet', json,  function(req, res) {
   });
 });
 
+router.delete('/tweet/:id', function(req, res){
+  var id = req.params.id;
+  Tweet.remove({_id: id}, function(err){
+    res.json({delete: !err});
+  });
+});
+
 router.get('/timeline', function(req, res){
   Tweet.getTimeline(function(err, tweets){
     res.json(tweets);

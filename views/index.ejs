@@ -36,10 +36,19 @@
         </div>
 
         <div href="#" class="list-group-item" ng-repeat="t in tweets | filter: search">
-          <p class="pull-right">{{ t.created_at | date:'HH:mm:ss' }}</p>
+          <div class="pull-right">
+
+            <p>{{ t.created_at | date:'HH:mm:ss' }}</p>
+            <button type="button"
+                    class="btn btn-danger"
+                    ng-click="deleteTweet(t)">
+                    <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </div>
           <h4 class="list-group-item-heading">{{ t.username }}</h4>
           <p class="list-group-item-text">{{ t.tweet }}</p>
           <a href="{{ '/tweet/' + t._id }}">Voir le tweet</a>
+
         </div>
 
       </div>

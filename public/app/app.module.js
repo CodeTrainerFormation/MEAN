@@ -8,6 +8,18 @@ app.controller('TimelineController', ['$scope', '$http', function($scope, $http)
     $scope.tweets = tweets = response.data;
   });
 
+  $scope.deleteTweet = function (tweet) {
+    $http.delete('/api/tweet/'+tweet._id)
+      .then(function(response){
+        if(response.data.delete) {
+          var idx = $scope.tweets.indexOf(tweet);
+
+          $scope.tweets.splice(idx, 1);
+        }
+      }
+    );
+  }
+
 }]);
 
 app.controller('PublishController', ['$scope', '$http', function($scope, $http){

@@ -5,8 +5,16 @@ var Tweet = require('../../models/Tweet');
 var json = bodyParser.json();
 
 router.post('/tweet', json,  function(req, res) {
-  Tweet(req.body).save(function(err, tweet){
-    res.json(tweet);
+  var user = req.session.user;
+  var t = {
+    tweet: req.body.tweet,
+    user: user
+  }
+  Tweet(t).save(function(err, tweet){
+    Tweet.findById(tweet._id).populate({path:'user', select:'username'}).exec(function(err, twt){
+      console.log(twt);
+      res.json(twt);
+    });
   });
 });
 

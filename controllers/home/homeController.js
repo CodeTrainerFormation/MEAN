@@ -12,7 +12,7 @@ router.route(['/', '/index'])
     }*/
 
     Tweet.getTimeline(function(err, twts){
-      res.render('index.ejs', { tweets : twts, username: req.session.username });
+      res.render('index.ejs', { tweets : twts, userid: req.session.user._id });
     });
   })
   .post(urlencoded, function(req, res){

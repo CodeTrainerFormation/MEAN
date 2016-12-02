@@ -1,9 +1,11 @@
 var timeline = angular.module('timeline', []);
 
-timeline.controller('TimelineController', ['$scope', '$http', function($scope, $http){
+timeline.controller('TimelineController',
+  ['$scope', '$http', 'tweetService', function($scope, $http, tweetService){
 
   $http.get('/api/timeline').then(function(response){
-    $scope.tweets = tweets = response.data;
+    console.log(response.data);
+    $scope.tweets = tweetService.tweets = response.data;
   });
 
   $scope.deleteTweet = function (tweet) {

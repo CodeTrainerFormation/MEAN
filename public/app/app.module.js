@@ -1,36 +1,3 @@
-var app = angular.module('twitter', []);
+var app = angular.module('twitter', ['timeline', 'mytweet', 'ngRoute']);
 
 var tweets = [];
-
-app.controller('TimelineController', ['$scope', '$http', function($scope, $http){
-
-  $http.get('/api/timeline').then(function(response){
-    $scope.tweets = tweets = response.data;
-  });
-
-  $scope.deleteTweet = function (tweet) {
-    $http.delete('/api/tweet/'+tweet._id)
-      .then(function(response){
-        if(response.data.delete) {
-          var idx = $scope.tweets.indexOf(tweet);
-
-          $scope.tweets.splice(idx, 1);
-        }
-      }
-    );
-  }
-
-}]);
-
-app.controller('PublishController', ['$scope', '$http', function($scope, $http){
-
-  $scope.sendTweet = function() {
-
-    $http.post('/api/tweet', $scope.twt).then(function(response){
-      tweets.unshift(response.data);
-      $scope.tweet = {};
-    });
-
-  }
-
-}]);

@@ -14,6 +14,13 @@ tweetSchema.statics.getTimeline = function(cb) {
         .exec(cb);
 }
 
+tweetSchema.statics.getPersonalTimeline = function(id, cb) {
+  return Tweet.find({user: id})
+        .sort({created_at: -1})
+        .populate({path:'user', select:'username'})
+        .exec(cb);
+}
+
 var Tweet = mongoose.model('Tweet', tweetSchema);
 
 module.exports = Tweet;

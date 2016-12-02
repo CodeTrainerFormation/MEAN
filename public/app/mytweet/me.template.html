@@ -1,0 +1,13 @@
+<div class="list-group">
+
+  <div href="#" class="list-group-item" ng-repeat="t in tweets | filter: search">
+    <div class="pull-right">
+      <p>{{ t.created_at | date:'HH:mm:ss' }}</p>
+    </div>
+    <h4 class="list-group-item-heading">{{ t.user.username }}</h4>
+    <p class="list-group-item-text">{{ t.tweet }}</p>
+    <a href="{{ '/tweet/' + t._id }}">Voir le tweet</a>
+
+  </div>
+
+</div>

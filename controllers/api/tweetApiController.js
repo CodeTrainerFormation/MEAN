@@ -31,4 +31,11 @@ router.get('/timeline', function(req, res){
   });
 });
 
+router.get('/timeline/me', function(req, res){
+  var id = req.session.user._id;
+  Tweet.getPersonalTimeline(id, function(err, tweets){
+    res.json(tweets);
+  });
+});
+
 module.exports = router;

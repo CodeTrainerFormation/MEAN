@@ -15,14 +15,16 @@ router.get('/:id', function(req, res){
     }
   }*/
 
-  Tweet.findById(_id, function(err, tweet){
-    if(tweet) {
-      res.render('tweet.ejs', tweet);
-    } else {
-      res.redirect('/');
-    }
+  Tweet.findById(_id)
+        .populate('user')
+        .exec(function(err, tweet){
+          if(tweet) {
+            res.render('tweet.ejs', tweet);
+          } else {
+            res.redirect('/');
+          }
+        });
   });
-});
 
 
 module.exports = router;

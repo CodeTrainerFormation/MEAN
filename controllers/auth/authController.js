@@ -25,4 +25,20 @@ router.route('/login')
         });
   });
 
+  router.route('/register')
+    .get(function(req, res) {
+      res.render('register.ejs');
+    })
+    .post(urlencoded, function(req, res){
+      var newUser = {
+        username: req.body.username,
+        password: hash(req.body.password)
+      }
+
+      User(newUser).save(function(err, user){
+        req.session.user = user;
+        res.redirect('/');
+      });
+    });
+
 module.exports = router;
